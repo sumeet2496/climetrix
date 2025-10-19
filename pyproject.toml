@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "climetrix"
+version = "0.1.0"
+description = "Transdisciplinary climate risk exposure mapping framework"
+authors = [{name = "Climetrix Contributors"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["earthengine-api>=0.1.359"]
+
+[project.scripts]
+climetrix = "climetrix.cli:main"

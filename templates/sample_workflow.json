@@ -1,0 +1,68 @@
+{
+  "region_asset_id": "users/your_username/india_states",
+  "hazards": [
+    {
+      "hazard_id": "flood",
+      "description": "Composite annual flood hazard",
+      "collection": "projects/sat-io/open-datasets/FLOOD/INUNDATION_2015_2021",
+      "reducer": "max",
+      "scale_m": 500,
+      "bands": ["inundation_depth"],
+      "filters": {
+        "date_range": {"start": "2015-01-01", "end": "2021-12-31"}
+      },
+      "temporal_aggregation": "annual",
+      "smoothing_radius_km": 5.0,
+      "classification_thresholds": {
+        "moderate": 0.3,
+        "severe": 0.6
+      }
+    },
+    {
+      "hazard_id": "cyclone",
+      "description": "Cyclone wind speed return period",
+      "collection": "NASA/ORNL/DAYMET_V4",
+      "reducer": "max",
+      "scale_m": 1000,
+      "bands": ["prcp"],
+      "filters": {
+        "date_range": {"start": "2010-01-01", "end": "2020-12-31"}
+      },
+      "temporal_aggregation": "seasonal",
+      "smoothing_radius_km": 10.0
+    }
+  ],
+  "hazard_weights": [
+    {"hazard_id": "flood", "weight": 0.6},
+    {"hazard_id": "cyclone", "weight": 0.4}
+  ],
+  "exposures": [
+    {
+      "sector_id": "agriculture",
+      "description": "Agricultural GDP density",
+      "collection": "users/your_username/agri_gdp_density",
+      "band": "gdp",
+      "exposure_metric": "GDP per sqkm",
+      "unit": "USD/km2",
+      "transformation": "log",
+      "scale_m": 1000
+    },
+    {
+      "sector_id": "manufacturing",
+      "description": "Manufacturing capital stock",
+      "collection": "users/your_username/manufacturing_capital_stock",
+      "band": "capital",
+      "exposure_metric": "Capital stock per sqkm",
+      "unit": "USD/km2",
+      "transformation": "sqrt",
+      "scale_m": 1000
+    }
+  ],
+  "output_scale_deg": 0.1,
+  "temporal_resolution": "annual",
+  "metadata": {
+    "project": "Climetrix India",
+    "author": "Your Name",
+    "date": "2024-05-01"
+  }
+}
